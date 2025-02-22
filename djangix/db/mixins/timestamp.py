@@ -1,83 +1,13 @@
-from django.db import models
+from django.db.models import Model, DateTimeField
 
 from django.utils.translation import gettext_lazy as _
 
 
-class TimeStampMixin(models.Model):
+class TimeStampMixin(Model):
     """ Миксин добавляет created_at и updated_at к модели """
 
-    created_at = models.DateTimeField(verbose_name=_("created_at"), auto_now_add=True)
-    updated_at = models.DateTimeField(verbose_name=_("updated_at"), auto_now=True)
-
-    class Meta:
-        abstract = True
-
-
-class MappingMixin(models.Model):
-    """ Миксин добавляющий к модели функцию get_map """
-
-    @classmethod
-    def get_map(cls, field_name: str = 'pk', queryset: models.QuerySet | None = None):
-        """
-        Возвращаем hashmap по определенному полю, можем передать queryset для формирования
-
-        :param field_name: название поля которое будет ключом hashmap
-        :param queryset: QuerySet, если нужно сделать hashmap по сложному запросу, например, с агрегацией
-        :return: hashmap
-        """
-
-        queryset = queryset or cls.objects.all()
-
-        return {getattr(obj, field_name): obj for obj in queryset}
-
-    class Meta:
-        abstract = True
-
-
-class UpdateIfChangedMixin(models.Model):
-    """ Миксин добавляющий к модели функцию update_if_changed """
-
-    def _update_fields_if_changed(self, data: dict, force_update_fields: list or None = None) -> [str]:
-        """
-        Обновление значений у полей объекта
-
-        :param data: новые (или нет) значения для полей
-        :param force_update_fields: названия полей, которые нужно обновить ни смотря ни на что
-        :return: список обновленных полей
-        """
-
-        updated_fields = []  # Список для хранения изменённых полей
-
-        if force_update_fields is None:
-            force_update_fields = []  # По умолчанию пустой список
-
-        for field, new_value in data.items():
-            if hasattr(self, field):
-                current_value = getattr(self, field)
-                if current_value != new_value or field in force_update_fields:
-                    setattr(self, field, new_value)
-                    updated_fields.append(field)  # Добавляем поле в список изменённых
-
-        return updated_fields
-
-    def update_if_changed(self, data: dict, force_update_fields: list or None = None) -> (bool, list):
-        """
-        Обновляет поля модели, только если они изменились.
-        Сохраняет только изменённые поля через update_fields.
-        Также обновляет поля, указанные в force_update_fields, даже если их значения не изменились
-
-        :param data: Словарь с данными
-        :param force_update_fields: Список полей, которые нужно обновить принудительно
-        :return: True и список обновленных полей, если были внесены изменения, иначе False и пустой список
-        """
-
-        updated_fields = self._update_fields_if_changed(data=data, force_update_fields=force_update_fields)
-
-        if updated_fields:
-            self.save(update_fields=updated_fields)
-            return True, updated_fields
-
-        return False, []
+    created_at = DateTimeField(verbose_name=_("created_at"), auto_now_add=True)
+    updated_at = DateTimeField(verbose_name=_("updated_at"), auto_now=True)
 
     class Meta:
         abstract = True
