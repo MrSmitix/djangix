@@ -1,0 +1,18 @@
+[project]
+name = "djangix"
+version = "0.0.1"
+description = "Djangix - a set of django auxiliary functions"
+authors = [
+    {name = "Марченко Андрей",email = "mr.smitix@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "setuptools (>=75.8.0,<76.0.0)",
+    "django (>=5.1.6,<6.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
