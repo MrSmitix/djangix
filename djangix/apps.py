@@ -3,6 +3,6 @@ from django.utils.translation import gettext_lazy as _
 
 
 class DjangixExtDjangoConfig(AppConfig):
-    name = "djangix.django"
-    label = "django_djangix"
+    name = "djangix"
+    label = "djangix"
     verbose_name = _("DjangixExtDjangoConfig")
