@@ -6,7 +6,7 @@ authors = [
     {name = "Марченко Андрей",email = "mr.smitix@gmail.com"}
 ]
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.9"
 dependencies = [
     "setuptools (>=75.8.0,<76.0.0)",
     "django (>=5.1.6,<6.0.0)"
