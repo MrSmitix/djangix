@@ -50,7 +50,6 @@ class RedisSemaphore:
         start = time()
         while (time() - start) < wait_for_seconds:
             if self.__redis.transaction(acquire_lock, self.__name, value_from_callable=True):
-                now = time()
                 return True
             elif blocking:
                 self.cleanup()

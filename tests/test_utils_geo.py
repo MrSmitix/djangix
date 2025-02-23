@@ -21,7 +21,7 @@ class Test(unittest.TestCase):
                 calculated_distance = calc_distance(first_lat, first_long, second_lat, second_long)
                 self.assertAlmostEqual(
                     first=calculated_distance,
-                    second=expected_distance, 
+                    second=expected_distance,
                     delta=10.0  # Используем delta для допуска / погрешности
                 )
 

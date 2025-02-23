@@ -3,7 +3,8 @@ from functools import wraps
 
 def synchronized(lock_name: str):
     """
-    Декоратор на метод класса, аналог Java synchronized, принимает имя члена класса, которое должно являться каким-либо Lock-ом
+    Декоратор на метод класса, аналог Java synchronized,
+    принимает имя члена класса, которое должно являться каким-либо Lock-ом
 
     Пример:
         def __init__(self):
