@@ -1,4 +1,11 @@
-from datetime import date
+from zoneinfo import ZoneInfo
+from datetime import datetime, date
+
+
+def get_utc_offset(tz_name: str):
+    """ Возвращает смещение по UTC в секундах """
+
+    return datetime.now(ZoneInfo(tz_name)).utcoffset().total_seconds()
 
 
 def calc_age(birthdate: date, target_date: date | None = None) -> int:
