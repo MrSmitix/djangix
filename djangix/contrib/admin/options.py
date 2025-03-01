@@ -18,8 +18,12 @@ class ReadOnlyModelAdmin(admin.ModelAdmin, ReadOnlyModelMixin):
     """ Базовая read-only админка """
 
 
-class ReadOnlyTabularInlineAdmin(admin.ModelAdmin, ReadOnlyModelMixin):
-    """ Базовая read-only админка """
+class ReadOnlyTabularInlineAdmin(admin.TabularInline, ReadOnlyModelMixin):
+    """ Базовая tabular read-only админка """
+
+
+class ReadOnlyStackedInlineAdmin(admin.StackedInline, ReadOnlyModelMixin):
+    """ Базовая tabular read-only админка """
 
 
 class BaseAppModelAdmin(admin.ModelAdmin):

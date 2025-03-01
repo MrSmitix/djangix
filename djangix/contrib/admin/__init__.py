@@ -1,1 +1,1 @@
-from .options import ReadOnlyModelAdmin, BaseAppModelAdmin
+from .options import ReadOnlyModelAdmin, BaseAppModelAdmin, ReadOnlyTabularInlineAdmin, ReadOnlyStackedInlineAdmin
