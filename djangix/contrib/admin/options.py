@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 
-class ReadOnlyModelAdmin(admin.ModelAdmin):
+class ReadOnlyModelMixin:
     """ Базовая read-only админка """
 
     def has_change_permission(self, request, obj=None):
@@ -12,6 +12,14 @@ class ReadOnlyModelAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
+
+
+class ReadOnlyModelAdmin(admin.ModelAdmin, ReadOnlyModelMixin):
+    """ Базовая read-only админка """
+
+
+class ReadOnlyTabularInlineAdmin(admin.ModelAdmin, ReadOnlyModelMixin):
+    """ Базовая read-only админка """
 
 
 class BaseAppModelAdmin(admin.ModelAdmin):
