@@ -1,29 +1,43 @@
 from django.contrib import admin
 
 
-class ReadOnlyModelMixin:
+class ReadOnlyModelAdmin(admin.ModelAdmin):
     """ Базовая read-only админка """
 
-    def has_change_permission(self, request, obj=None):
+    def has_add_permission(self, request):
         return False
 
-    def has_add_permission(self, request):
+    def has_change_permission(self, request, obj=None):
         return False
 
     def has_delete_permission(self, request, obj=None):
         return False
 
 
-class ReadOnlyModelAdmin(admin.ModelAdmin, ReadOnlyModelMixin):
-    """ Базовая read-only админка """
-
-
-class ReadOnlyTabularInlineAdmin(admin.TabularInline, ReadOnlyModelMixin):
+class ReadOnlyTabularInlineAdmin(admin.TabularInline):
     """ Базовая tabular read-only админка """
 
+    def has_add_permission(self, request, obj):
+        return False
 
-class ReadOnlyStackedInlineAdmin(admin.StackedInline, ReadOnlyModelMixin):
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+class ReadOnlyStackedInlineAdmin(admin.StackedInline):
     """ Базовая tabular read-only админка """
+
+    def has_add_permission(self, request, obj):
+        return False
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 class BaseAppModelAdmin(admin.ModelAdmin):
